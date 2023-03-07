@@ -6,15 +6,12 @@ import { listMovies } from "../utils/api";
 function MoviesList() {
   const [movies, setMovies] = useState([]);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     setError(null);
     const abortController = new AbortController();
     listMovies(abortController.signal).then(setMovies).catch(setError);
-
     return () => abortController.abort();
   }, []);
-
   const list = movies.map((movie) => (
     <article key={movie.movie_id} className="col-sm-12 col-md-6 col-lg-3 my-2">
       <img
